@@ -1,0 +1,41 @@
+[
+  {
+    "name": "gamecenter-lounge",
+    "prompt": "Use case: stylized-concept\nAsset type: wide website background, landscape 16:9\nPrimary request: An original dreamy 3D miniature arcade lounge for a family game hub called Game Center. Warm charcoal/brown background #1d1410 with warm amber #ffbd55 and coral #f46e57 details.\nScene/backdrop: a sculpted miniature arcade lounge suggested around the outer edges, with just a few glowing playful geometric shapes and refined arcade joystick/button details.\nStyle/medium: premium playful 3D render, soft tactile enamel and rounded shapes, tasteful and inviting.\nComposition/framing: Wide landscape. Keep the central 65 percent of the image dark, quiet, spacious and largely empty for a website interface to be layered over it. Decorative arcade objects sit near the corners and outer edges, never dominating the center. Full bleed scene.\nLighting/mood: gentle amber glows, restrained coral highlights, dreamy cinematic ambient light; deep warm dark central negative space.\nConstraints: No text, no letters, no people, no logos, no watermark. This is standalone background artwork, not a screenshot or interface mockup.",
+    "generation_method": "built-in image_gen",
+    "width": 1672,
+    "height": 941,
+    "format": "PNG",
+    "bytes": 1564248,
+    "outputs": [
+      "assets/arcade-lounge.webp"
+    ]
+  },
+  {
+    "name": "gamecenter-icon",
+    "prompt": "Use case: logo-brand\nAsset type: square home-screen app icon, 1:1\nPrimary request: An original bold golden arcade joystick/play emblem with one coral button for a family game hub called Game Center.\nScene/backdrop: Full-bleed warm charcoal/brown #1d1410 square background with subtle amber illumination.\nSubject: one centered iconic golden amber #ffbd55 arcade joystick/play emblem, simple sculpted joystick form with a distinct coral #f46e57 button; a compact recognizable silhouette.\nStyle/medium: premium playful 3D render, clean sculpted enamel, smooth softly rounded forms, polished but tactile.\nComposition/framing: Square, centered with a safe margin of approximately 18 percent on all sides. Very clear recognizable form at tiny app-icon sizes. The background fills the entire square, with no baked outer padding and no transparency.\nLighting/mood: warm amber light, restrained coral accent, soft dimensional shadow.\nConstraints: No letters, no words, no text, no outside logos, no watermark, no border, no phone mockup. Avoid clutter and fine detail.",
+    "generation_method": "built-in image_gen",
+    "width": 1254,
+    "height": 1254,
+    "format": "PNG",
+    "bytes": 1540851,
+    "outputs": [
+      "assets/app-icon-512.png",
+      "assets/app-icon-192.png",
+      "assets/apple-touch-icon.png",
+      "assets/favicon-48.png"
+    ]
+  },
+  {
+    "name": "gamecenter-share",
+    "prompt": "Use case: ads-marketing\nAsset type: social share artwork, landscape approximately 1.91:1\nPrimary request: An original premium playful share card for the family game hub Game Center, with elegant amber and coral 3D arcade motifs on a warm dark background.\nScene/backdrop: warm charcoal/brown #1d1410; golden amber #ffbd55 arcade joystick and play-shape details with coral #f46e57 buttons, arranged elegantly around the typography.\nStyle/medium: tactile sculpted enamel 3D miniature arcade motif, softly rounded forms, warm dimensional lighting, sophisticated playful aesthetic.\nComposition/framing: Landscape near 1.91:1 aspect ratio. Large crisp centered title with a clearly readable subtitle underneath. Keep all lettering well inside safe margins. Decorative 3D arcade shapes frame the type without covering it.\nText (verbatim): \"GAME CENTER\"\nSubtitle (verbatim): \"Good games. Questionable bragging rights.\"\nTypography: very legible bright cream rounded lettering; title large and bold, subtitle smaller but still clear. The only text in the image must be exactly those two lines, with correct punctuation and spelling.\nLighting/mood: warm amber glow and restrained coral accents, inviting and playful.\nConstraints: No outside logos, no watermark, no phone mockup, no interface screenshot.",
+    "generation_method": "built-in image_gen",
+    "width": 1734,
+    "height": 907,
+    "format": "PNG",
+    "bytes": 1752596,
+    "outputs": [
+      "assets/social-share.jpg"
+    ]
+  }
+]

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#211710">
+  <meta name="description" content="Good games. Questionable bragging rights. Your home for Google Feud, Same Slate, Henry the Train, and whatever we dream up next.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Game Center — Good games. Questionable bragging rights.">
+  <meta property="og:description" content="One place for your favorite games. Bring your friends, your best guesses, and absolutely no guarantee of good answers.">
+  <meta property="og:url" content="https://seansommer.github.io/gamecenter/">
+  <meta property="og:image" content="https://seansommer.github.io/gamecenter/assets/social-share.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Game Center">
+  <title>Game Center · Let the good games roll</title>
+  <link rel="canonical" href="https://seansommer.github.io/gamecenter/">
+  <link rel="icon" type="image/png" sizes="48x48" href="./assets/favicon-48.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css?v=1">
+  <script type="module" src="./src/app.js?v=1"></script>
+</head>
+<body>
+  <a class="skip-link" href="#collection">Skip to games</a>
+  <div class="atmosphere" aria-hidden="true"><div class="room"></div><i></i><i></i><i></i></div>
+  <div id="launcher" class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Game Center home"><img src="./assets/app-icon-192.png" width="48" height="48" alt=""><span>Game Center<span class="brand-caption">A LITTLE FRIENDLY COMPETITION</span></span></a>
+      <nav class="header-actions" aria-label="Game Center controls">
+        <button id="sound-toggle" class="icon-button" type="button" aria-label="Mute Game Center music" title="Music"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 18V5l12-2v13M9 8l12-2"/><ellipse cx="6" cy="18" rx="3" ry="2.5"/><ellipse cx="18" cy="16" rx="3" ry="2.5"/><path class="muted-slash" d="m3 3 18 18"/></svg></button>
+        <button id="share-button" class="icon-button" type="button" aria-label="Share Game Center" title="Share Game Center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 15V3m-4 4 4-4 4 4M5 11v9h14v-9"/></svg></button>
+        <button id="account-button" class="button small primary" type="button">User Login <span aria-hidden="true">↗</span></button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="eyebrow"><span class="spark" aria-hidden="true">✦</span> YOUR PEOPLE. YOUR GAMES. ONE PLACE.</div>
+        <h1 id="hero-title">Good games.<br><span>Questionable bragging rights.</span></h1>
+        <p>Bring your favorite people. We’ll bring the fun.<br class="desktop-break"> Your next “okay, just one more round” starts here.</p>
+      </section>
+
+      <section class="collection" id="collection" tabindex="-1" aria-labelledby="collection-title">
+        <div class="collection-heading"><h2 id="collection-title">Pick your kind of fun</h2><span id="game-count" class="collection-count">THE COLLECTION</span></div>
+        <div id="games" class="game-grid"></div>
+        <div class="player-strip">
+          <div id="player-avatar" class="avatar" aria-hidden="true">☺</div>
+          <div class="player-copy"><strong id="player-title">One player. All your games.</strong><p id="player-subtitle">Sign in once for Google Feud and Same Slate. Your player comes with you.</p></div>
+          <button id="player-action" class="text-button" type="button">Let’s play <span aria-hidden="true">→</span></button>
+        </div>
+        <p id="connection-status" class="connection-status" role="status" hidden></p>
+      </section>
+
+      <div class="below-collection">
+        <div class="jukebox"><span class="record" aria-hidden="true"><i></i></span><div><span class="eyebrow small-label">ON THE JUKEBOX</span><strong>Meet Me at the Arcade</strong><span id="music-caption">Original music · Starts with your first tap</span></div><label class="volume-label" for="music-volume"><span class="sr-only">Game Center music volume</span><input id="music-volume" type="range" min="0" max="100" value="34" aria-label="Game Center music volume"></label></div>
+        <button id="install-button" class="install-card" type="button"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 18h4M12 6v7m-3-3 3 3 3-3"/></svg><span><strong>Make room on your home screen</strong><small>All the games. One little icon.</small></span><span aria-hidden="true">↗</span></button>
+      </div>
+      <p class="more-to-come"><span aria-hidden="true">✦</span> More games are always welcome at this table.</p>
+    </main>
+    <footer class="site-footer"><button id="share-footer" class="footer-share" type="button">Invite the good company ↗</button><span>Created by Sean</span></footer>
+  </div>
+
+  <section id="game-player" class="game-player" aria-label="Playing a game" hidden>
+    <header class="player-header"><button id="back-to-hub" class="text-button" type="button">← <span>Game Center</span></button><strong id="playing-title"></strong><a id="open-game-tab" class="icon-button" target="_blank" rel="noopener" aria-label="Open game in a new tab" title="Open in a new tab">↗</a></header>
+    <div id="frame-holder" class="frame-holder"></div>
+    <p id="frame-status" class="frame-status" role="status">Getting the good times ready…</p>
+  </section>
+
+  <dialog id="account-dialog" aria-labelledby="account-title">
+    <button class="dialog-close icon-button" data-close="account-dialog" type="button" aria-label="Close player account">×</button>
+    <div class="dialog-mark" aria-hidden="true">✦</div>
+    <div id="auth-view">
+      <h2 id="account-title">Your seat at the table</h2><p class="dialog-intro">Use the same email and nickname you use in Google Feud or Same Slate.</p>
+      <div id="preview-signin" hidden><p>Open the live Game Center to use your shared player and launch your games.</p><a id="live-hub-link" class="button primary" href="https://seansommer.github.io/gamecenter/">Open live Game Center ↗</a></div>
+      <form id="auth-form">
+        <fieldset id="auth-fields">
+          <div class="auth-tabs" role="group" aria-label="Player account action"><button id="signin-tab" type="button" aria-pressed="true">Sign in</button><button id="signup-tab" type="button" aria-pressed="false">New player</button></div>
+          <label for="player-email">Email address</label><input id="player-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required placeholder="you@example.com">
+          <label for="player-nickname">Player nickname</label><input id="player-nickname" name="displayName" autocomplete="username" maxlength="30" required placeholder="Your legendary nickname">
+          <p class="field-hint">Nickname and email find your existing player. No new account needed.</p>
+          <button id="auth-submit" class="button primary wide" type="submit">Sign in & get playing <span aria-hidden="true">→</span></button>
+        </fieldset>
+      </form>
+      <p id="auth-error" class="form-message" role="alert" hidden></p>
+      <button id="retry-connection" class="text-button" type="button" hidden>Try connecting again</button>
+    </div>
+    <div id="profile-view" hidden>
+      <h2 id="profile-title">Welcome back</h2><p class="dialog-intro" id="profile-description"></p>
+      <span id="profile-role" class="role-pill"></span>
+      <div id="message-id-block" class="message-id-block" hidden><span class="eyebrow small-label">YOUR MESSAGE ID</span><code id="message-id"></code><p>Share this ID and your nickname so friends can message you inside either game.</p><button id="copy-message-id" class="text-button" type="button">Copy Message ID ↗</button></div>
+      <p class="profile-note">Your dashboards, stats, Hall of Fame, and Message Center are waiting inside your games.</p>
+      <button id="profile-play" class="button primary wide" type="button">Choose a game →</button>
+      <button id="signout-button" class="text-button signout-button" type="button">Sign out of all games on this browser</button>
+      <p id="profile-error" class="form-message" role="alert" hidden></p>
+    </div>
+  </dialog>
+
+  <dialog id="install-dialog" aria-labelledby="install-title"><button class="dialog-close icon-button" data-close="install-dialog" type="button" aria-label="Close install instructions">×</button><img class="install-icon" src="./assets/app-icon-192.png" width="76" height="76" alt="Game Center joystick icon"><h2 id="install-title">Your new favorite icon</h2><p class="dialog-intro">Keep the whole collection a tap away.</p><div id="install-instructions"><p><strong>iPhone or iPad:</strong> Open Game Center in Safari, tap Share, then <strong>Add to Home Screen</strong>.</p><p><strong>Android:</strong> Open the browser menu and choose <strong>Install app</strong> or <strong>Add to Home screen</strong>.</p><p><strong>Computer:</strong> Look for the install icon in your browser’s address bar.</p></div><p class="field-hint">Online play needs an internet connection. The launcher stays available offline.</p><button class="button primary wide" type="button" data-close="install-dialog">Got it →</button></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <noscript><p class="noscript">Turn on JavaScript to sign in and open games, or visit <a href="https://seansommer.github.io/googlefeud/">Google Feud</a>, <a href="https://seansommer.github.io/sameslate/">Same Slate</a>, or <a href="https://seansommer.github.io/henrythetrain/">Henry the Train</a>.</p></noscript>
+</body>
+</html>

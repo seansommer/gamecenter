@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "Game Center",
+  "short_name": "Game Center",
+  "description": "Good games. Questionable bragging rights. All your games, one little icon.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1b130e",
+  "theme_color": "#211710",
+  "icons": [
+    {"src":"./assets/app-icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"./assets/app-icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"}
+  ],
+  "categories": ["games", "entertainment"],
+  "shortcuts": [
+    {"name":"Play Google Feud","url":"./?play=googlefeud","icons":[{"src":"./assets/games/googlefeud.webp","sizes":"256x256","type":"image/webp"}]},
+    {"name":"Play Same Slate","url":"./?play=sameslate","icons":[{"src":"./assets/games/sameslate.webp","sizes":"256x256","type":"image/webp"}]},
+    {"name":"Play Henry the Train","url":"./?play=henrythetrain","icons":[{"src":"./assets/games/henrythetrain.webp","sizes":"256x256","type":"image/webp"}]}
+  ]
+}
