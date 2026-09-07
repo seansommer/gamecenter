@@ -1,11 +1,11 @@
 const PREFIX = "gamecenter-shell-";
-const CACHE = "gamecenter-shell-v2";
+const CACHE = "gamecenter-shell-v3";
 const ASSETS = [
-  "./", "./index.html", "./styles.css?v=2", "./manifest.webmanifest",
+  "./", "./index.html", "./styles.css?v=3", "./manifest.webmanifest",
   "./assets/arcade-lounge.webp", "./assets/app-icon-192.png", "./assets/app-icon-512.png",
   "./assets/apple-touch-icon.png", "./assets/favicon-48.png",
   "./assets/games/googlefeud.webp", "./assets/games/sameslate.webp", "./assets/games/henrythetrain.webp",
-  "./src/app.js?v=2", "./src/catalog.js", "./src/config.js", "./src/identity.js",
+  "./src/app.js?v=3", "./src/appearance.js?v=1", "./src/catalog.js", "./src/config.js", "./src/identity.js",
   "./src/services/audio.js", "./src/services/music.js", "./src/services/player-session.js"
 ];
 self.addEventListener("install", event => {

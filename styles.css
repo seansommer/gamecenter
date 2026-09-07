@@ -13,11 +13,80 @@ dialog{background:linear-gradient(140deg,#38291e,#211810);color:var(--ink);borde
 @media(max-width:360px){.brand-caption{display:none}.game-icon{width:68px;height:68px;border-radius:16px}.game-name{font-size:14px}.collection-heading h2{font-size:20px}.site-shell{width:calc(100% - 22px)}.header-actions{gap:5px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 .footer-share{background:none;border:0;color:#c4a47f;padding:0;text-align:left;font:inherit;min-height:24px}.footer-share:hover{color:var(--amber)}
-/* Leave room for the status bar and notch in an installed phone app. */
-.site-header{padding-top:calc(30px + env(safe-area-inset-top,0px));padding-bottom:24px;min-height:calc(102px + env(safe-area-inset-top,0px))}
+/* Keep the same always-available controls as the games, below the phone notch. */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: block;
+  padding: calc(30px + env(safe-area-inset-top,0px)) env(safe-area-inset-right,0px) 24px env(safe-area-inset-left,0px);
+  min-height: calc(102px + env(safe-area-inset-top,0px));
+  border-bottom: 1px solid #edc58c30;
+  background: linear-gradient(110deg,#302116f5,#211710f5);
+  box-shadow: 0 8px 28px #10080335;
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+.header-inner { display:flex; align-items:center; justify-content:space-between; gap:24px; }
+.site-header .brand { flex-shrink:0; min-width:44px; min-height:44px; }
+.header-actions { gap:8px; min-width:0; }
+.header-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid #edc58c35;
+  border-radius: 10px;
+  background: #ffe6bd0a;
+  color: #ffe3bd;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: .07em;
+  white-space: nowrap;
+}
+.header-button:hover { background:#ffc66b20; border-color:#ffc66b70; transform:translateY(-1px); }
+.header-button:active { transform:translateY(1px); }
+.header-toggle { min-width:108px; flex-shrink:0; }
+.header-icon { width:44px; padding:0; flex-shrink:0; }
+.header-account { min-width:0; max-width:180px; border-radius:999px; color:#ffcd83; letter-spacing:0; font-size:12px; }
+#account-label { overflow:hidden; text-overflow:ellipsis; }
+#sound-toggle.muted { color:#c4ac90; }
+#night-mode-toggle[aria-pressed=true] { border-color:#f5c36c88; background:#f5c36c20; color:#ffdda0; }
+.collection { scroll-margin-top:calc(130px + env(safe-area-inset-top,0px)); }
+
+/* Night Mode keeps Game Center's warm identity, with the room lights turned down. */
+html.night-mode, .night-mode .atmosphere { background:#100c09; }
+.night-mode .room { opacity:.08; animation:none; }
+.night-mode .atmosphere>i { display:none; }
+.night-mode .site-header { background:#16100bf5; border-bottom-color:#b7936330; box-shadow:0 8px 28px #0004; }
+.night-mode .collection { background:linear-gradient(145deg,#20170ff5,#16100cfb 72%); box-shadow:0 22px 70px #0005,inset 0 1px 0 #ffffff0d; }
+.night-mode .player-strip { background:#09070566; }
+.night-mode .install-card { background:#19110d; }
+.night-mode dialog { background:linear-gradient(140deg,#251b13,#140f0b); }
+
 .site-footer{display:flex;flex-direction:column;align-items:center;gap:13px;text-align:center;padding-top:25px}
 .game-center-wordmark{display:block;width:min(280px,72vw);line-height:0;filter:drop-shadow(0 5px 10px #0004)}
 .game-center-wordmark svg{display:block;width:100%;height:auto;overflow:visible}
 .game-player{padding-top:env(safe-area-inset-top,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 .frame-recovery{position:absolute;top:calc(40% + 65px);left:50%;transform:translateX(-50%);padding:12px 18px;white-space:nowrap;color:var(--amber);font-size:13px;text-decoration:underline}
 @media(max-width:600px){.site-header{padding-top:calc(26px + env(safe-area-inset-top,0px));padding-bottom:18px;min-height:calc(88px + env(safe-area-inset-top,0px))}.site-footer{gap:12px}.game-center-wordmark{width:240px}}
+@media(max-width:850px) {
+  .header-inner { gap:14px; }
+  .site-header .brand-caption { display:none; }
+  .site-header .brand { font-size:22px; }
+  .header-account { max-width:145px; }
+}
+@media(max-width:760px) {
+  .header-toggle { min-width:44px; width:44px; padding:0; }
+  .control-label { display:none; }
+}
+@media(max-width:600px) {
+  .header-inner { gap:10px; }
+  .site-header .brand>span { display:none; }
+  .header-actions { gap:6px; }
+  .header-account { max-width:150px; padding:8px 11px; font-size:11px; }
+  .collection { scroll-margin-top:calc(112px + env(safe-area-inset-top,0px)); }
+}

@@ -36,7 +36,9 @@ function renderGames() {
 }
 
 function updateAccount() {
-  $("account-button").textContent = profile ? "My Player ↗" : "User Login ↗";
+  $("account-label").textContent = profile ? profile.displayName || "My Player" : "User Login";
+  $("account-button").setAttribute("aria-label", profile ? "Open " + (profile.displayName || "your") + " player profile" : "User Login");
+  $("account-button").title = profile ? "Open your player profile" : "User Login";
   $("player-avatar").textContent = profile ? Array.from(profile.displayName || "P").slice(0,2).join("").toUpperCase() : "☺";
   $("player-title").textContent = profile ? "You’re in, " + profile.displayName + "." : "One player. All your games.";
   $("player-subtitle").textContent = profile ? "Your player is ready for Google Feud and Same Slate. Pick a game above." : "Sign in once for Google Feud and Same Slate. Your player comes with you.";
@@ -115,8 +117,9 @@ function showHub({ updateHistory = true } = {}) {
 function updateMusicUI() {
   const playing = soundEffects.enabled && soundEffects.musicVolume > 0 && hasInteracted && !activeGame;
   $("sound-toggle").classList.toggle("muted", !soundEffects.enabled);
-  $("sound-toggle").setAttribute("aria-label", soundEffects.enabled ? "Mute Game Center music" : "Turn on Game Center music");
+  $("sound-toggle").title = soundEffects.enabled ? "Turn sound off" : "Turn sound on";
   $("sound-toggle").setAttribute("aria-pressed", String(soundEffects.enabled));
+  $("sound-label").textContent = soundEffects.enabled ? "SOUND ON" : "SOUND OFF";
   document.body.classList.toggle("music-playing", playing);
   $("music-caption").textContent = !soundEffects.enabled || soundEffects.musicVolume === 0 ? "Music off · Your volume is saved" : hasInteracted ? "Original music · A little groove for game night" : "Original music · Starts with your first tap";
 }

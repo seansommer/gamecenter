@@ -23,6 +23,8 @@ No Cloudflare Worker, new Firebase project, new API key, or new database rules a
 - Google Feud and Same Slate open inside the hub without an extra header. Each game has a Game Center icon in its own header and footer. Their full dashboards, scoring, Hall of Fame, messages and host controls remain available.
 - Henry the Train opens without sign-in.
 - The hub pauses its music while a game is open. Returning closes the embedded game view; active rooms remain in Firebase and can be resumed using the game's existing resume controls.
+- Game Center's header stays visible while scrolling, with a player-profile button, sound switch and Night Mode switch. Phone controls keep 44px tap targets and space below the status bar. The original Game Center icon and artwork are unchanged.
+- Night Mode dims the lounge to a warm, almost-black background. Its `gamecenter.nightMode.v1` preference is saved in this browser independently of each game's settings and applied before the page paints. Switching modes does not reload the page or clear account fields.
 
 Firebase's persistent browser session is shared because the public hub and word games all use **https://seansommer.github.io**, the same default Firebase app, and `browserLocalPersistence`. Keep these consistent. Firebase sessions are origin-specific: https://firebase.google.com/docs/auth/web/auth-state-persistence
 
