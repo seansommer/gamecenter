@@ -86,20 +86,24 @@ function launchGame(game) {
   pendingGame = null; closeDialog("account-dialog"); activeGame = game;
   soundEffects.syncBackgroundMusic(null); updateMusicUI();
   $("launcher").hidden = true; $("game-player").hidden = false; document.body.classList.add("in-game");
-  $("playing-title").textContent = game.name; $("open-game-tab").href = gameUrl(game);
+  $("game-player").setAttribute("aria-label", "Playing " + game.name);
+  $("frame-recovery").hidden = true;
   document.title = game.name + " · Game Center";
   const iframe = document.createElement("iframe"); iframe.title = game.name; iframe.src = gameUrl(game);
   iframe.allow = "autoplay; clipboard-write; fullscreen; web-share";
   iframe.referrerPolicy = "strict-origin-when-cross-origin";
   message("frame-status", "Opening " + game.name + "…"); clearTimeout(frameTimer);
-  iframe.addEventListener("load", () => { clearTimeout(frameTimer); message("frame-status", ""); });
-  frameTimer = setTimeout(() => message("frame-status", "Still loading? Use the ↗ button above to open the game directly."), 18000);
+  iframe.addEventListener("load", () => { clearTimeout(frameTimer); message("frame-status", ""); $("frame-recovery").hidden = true; });
+  frameTimer = setTimeout(() => {
+    message("frame-status", "The game is taking a while to load. Check your connection and try again.");
+    $("frame-recovery").hidden = false;
+  }, 18000);
   $("frame-holder").replaceChildren(iframe);
   const url = new URL(location.href);
   if (url.searchParams.get("play") !== game.id) {
     url.searchParams.set("play", game.id); history.pushState({ game: game.id }, "", url);
   }
-  $("back-to-hub").focus({ preventScroll:true });
+  $("game-player").focus({ preventScroll:true });
 }
 function showHub({ updateHistory = true } = {}) {
   activeGame = null; clearTimeout(frameTimer); $("frame-holder").replaceChildren();
@@ -129,7 +133,6 @@ $("sound-toggle").addEventListener("click", () => { soundEffects.toggle(); updat
 $("music-volume").addEventListener("input", event => { soundEffects.setMusicVolume(Number(event.target.value) / 100); updateMusicUI(); });
 $("account-button").addEventListener("click", showAccount);
 $("player-action").addEventListener("click", showAccount);
-$("back-to-hub").addEventListener("click", () => showHub());
 $("profile-play").addEventListener("click", () => { closeDialog("account-dialog"); $("collection").focus(); });
 for (const button of document.querySelectorAll("[data-close]")) button.addEventListener("click", () => closeDialog(button.dataset.close));
 $("account-dialog").addEventListener("close", () => { if (!authBusy) pendingGame = null; });
@@ -170,12 +173,21 @@ async function shareHub() {
 }
 $("share-button").addEventListener("click", shareHub);
 $("share-footer").addEventListener("click", shareHub);
-window.addEventListener("beforeinstallprompt", event => { event.preventDefault(); installPrompt = event; });
-window.addEventListener("appinstalled", () => { installPrompt = null; toast("Game Center is on your home screen. Excellent taste."); });
+function updateInstallUI() {
+  const installed = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+  document.body.classList.toggle("installed-app", installed);
+  $("install-button").hidden = installed;
+  $("install-button-title").textContent = installPrompt ? "Install Game Center" : "Add to Home Screen";
+  $("install-button-note").textContent = installPrompt ? "Tap to open your browser’s install prompt." : "All the games. One little icon.";
+}
+window.addEventListener("beforeinstallprompt", event => { event.preventDefault(); installPrompt = event; updateInstallUI(); });
+window.addEventListener("appinstalled", () => { installPrompt = null; updateInstallUI(); toast("Game Center is on your home screen. Excellent taste."); });
+window.matchMedia("(display-mode: standalone)").addEventListener("change", updateInstallUI);
+updateInstallUI();
 $("install-button").addEventListener("click", async () => {
   if (!sharedOrigin) { location.assign(hubUrl()); return; }
   if (installPrompt) {
-    const prompt = installPrompt; installPrompt = null;
+    const prompt = installPrompt; installPrompt = null; updateInstallUI();
     try { await prompt.prompt(); await prompt.userChoice; } catch { openDialog("install-dialog"); }
   } else openDialog("install-dialog");
 });

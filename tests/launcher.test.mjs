@@ -21,13 +21,15 @@ test("manifest stays in its own directory and shortcuts resolve to catalog games
 });
 test("offline activation leaves Google Feud, Same Slate and unrelated caches alone",async ()=>{
   const events = {}, removed = [];
-  vm.runInNewContext(await readFile(new URL("../service-worker.js",import.meta.url),"utf8"),{
+  const source = await readFile(new URL("../service-worker.js",import.meta.url),"utf8");
+  const currentCache = source.match(/const CACHE = "([^"]+)"/)[1];
+  vm.runInNewContext(source,{
     self:{addEventListener:(name,handler)=>events[name]=handler,clients:{claim:()=>{}},registration:{scope:"https://seansommer.github.io/gamecenter/"}},
-    caches:{keys:async()=>["googlefeud-shell-v25","sameslate-shell-v9","gamecenter-shell-v0","gamecenter-shell-v1","other"],delete:async key=>removed.push(key)},
+    caches:{keys:async()=>["googlefeud-shell-v25","sameslate-shell-v9","gamecenter-shell-obsolete",currentCache,"other"],delete:async key=>removed.push(key)},
     URL
   });
   let done; events.activate({waitUntil:promise=>done=promise}); await done;
-  assert.deepEqual(removed,["gamecenter-shell-v0"]);
+  assert.deepEqual(removed,["gamecenter-shell-obsolete"]);
   let intercepted = false;
   events.fetch({request:{method:"GET",url:"https://seansommer.github.io/sameslate/src/app.js"},respondWith:()=>intercepted=true});
   events.fetch({request:{method:"GET",url:"https://fued-728c4-default-rtdb.firebaseio.com/users.json"},respondWith:()=>intercepted=true});

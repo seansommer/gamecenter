@@ -24,8 +24,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=1">
-  <script type="module" src="./src/app.js?v=1"></script>
+  <link rel="stylesheet" href="./styles.css?v=2">
+  <script type="module" src="./src/app.js?v=2"></script>
 </head>
 <body>
   <a class="skip-link" href="#collection">Skip to games</a>
@@ -60,17 +60,32 @@
 
       <div class="below-collection">
         <div class="jukebox"><span class="record" aria-hidden="true"><i></i></span><div><span class="eyebrow small-label">ON THE JUKEBOX</span><strong>Meet Me at the Arcade</strong><span id="music-caption">Original music · Starts with your first tap</span></div><label class="volume-label" for="music-volume"><span class="sr-only">Game Center music volume</span><input id="music-volume" type="range" min="0" max="100" value="34" aria-label="Game Center music volume"></label></div>
-        <button id="install-button" class="install-card" type="button"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 18h4M12 6v7m-3-3 3 3 3-3"/></svg><span><strong>Make room on your home screen</strong><small>All the games. One little icon.</small></span><span aria-hidden="true">↗</span></button>
+        <button id="install-button" class="install-card" type="button"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 18h4M12 6v7m-3-3 3 3 3-3"/></svg><span><strong id="install-button-title">Add to Home Screen</strong><small id="install-button-note">All the games. One little icon.</small></span><span aria-hidden="true">↗</span></button>
       </div>
       <p class="more-to-come"><span aria-hidden="true">✦</span> More games are always welcome at this table.</p>
     </main>
-    <footer class="site-footer"><button id="share-footer" class="footer-share" type="button">Invite the good company ↗</button><span>Created by Sean</span></footer>
+    <footer class="site-footer">
+      <a class="game-center-wordmark" href="./" aria-label="Game Center home">
+        <svg viewBox="0 0 680 130" role="img" aria-labelledby="wordmark-title">
+          <title id="wordmark-title">Game Center</title>
+          <defs><linearGradient id="wordmark-gold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff2cb"/><stop offset=".55" stop-color="#ffca75"/><stop offset="1" stop-color="#ef9d40"/></linearGradient></defs>
+          <g text-anchor="middle" font-family="'Baloo 2', sans-serif" font-weight="800" font-size="92" letter-spacing="1">
+            <text x="340" y="100" fill="#82462d">GAME CENTER</text>
+            <text x="340" y="95" fill="url(#wordmark-gold)" stroke="#ffc373" stroke-width=".6">GAME CENTER</text>
+          </g>
+          <path d="M259 117h60m42 0h60" stroke="#c17b48" stroke-width="2" stroke-linecap="round"/>
+          <path d="m340 111 4 6-4 6-4-6z" fill="#f58d6f"/>
+        </svg>
+      </a>
+      <button id="share-footer" class="footer-share" type="button">Invite the good company ↗</button>
+      <span>Created by Sean</span>
+    </footer>
   </div>
 
-  <section id="game-player" class="game-player" aria-label="Playing a game" hidden>
-    <header class="player-header"><button id="back-to-hub" class="text-button" type="button">← <span>Game Center</span></button><strong id="playing-title"></strong><a id="open-game-tab" class="icon-button" target="_blank" rel="noopener" aria-label="Open game in a new tab" title="Open in a new tab">↗</a></header>
+  <section id="game-player" class="game-player" aria-label="Playing a game" tabindex="-1" hidden>
     <div id="frame-holder" class="frame-holder"></div>
     <p id="frame-status" class="frame-status" role="status">Getting the good times ready…</p>
+    <a id="frame-recovery" class="frame-recovery" href="./" hidden>Return to Game Center</a>
   </section>
 
   <dialog id="account-dialog" aria-labelledby="account-title">

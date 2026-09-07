@@ -12,7 +12,7 @@ Public address: https://seansommer.github.io/gamecenter/
 2. Open **Actions → Verify and deploy Game Center → Run workflow** on `main` (or rerun the failed deployment).
 3. When deployment succeeds, open the public address above. On a phone, use the install control or **Add to Home Screen**.
 
-The connected GitHub app can publish source and workflows but has no repository administration permission to enable Pages. This one-time setting belongs to the repository owner.
+GitHub Pages is enabled. Future pushes to main run the checks and publish automatically. The instructions above also document how to set up another repository.
 
 No Cloudflare Worker, new Firebase project, new API key, or new database rules are required for this hub. It uses the Firebase configuration and shared account paths already used by both word games. Existing message features still require the message rules previously supplied with those games.
 
@@ -20,7 +20,7 @@ No Cloudflare Worker, new Firebase project, new API key, or new database rules a
 
 - Sign in with the same email and nickname used in Google Feud or Same Slate, or create one shared player here.
 - Existing player IDs, roles, host numbers, Message IDs, game history and scores stay attached to the same profiles. Game-specific statistics remain in the games; Game Center does not rewrite scores.
-- Google Feud and Same Slate open inside the hub with a small return bar. Their full dashboards, scoring, Hall of Fame, messages and host controls remain available.
+- Google Feud and Same Slate open inside the hub without an extra header. Each game has a Game Center icon in its own header and footer. Their full dashboards, scoring, Hall of Fame, messages and host controls remain available.
 - Henry the Train opens without sign-in.
 - The hub pauses its music while a game is open. Returning closes the embedded game view; active rooms remain in Firebase and can be resumed using the game's existing resume controls.
 
