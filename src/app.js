@@ -1,4 +1,5 @@
-import { GAMES, findGame, gameUrl, hubUrl, isSharedOrigin } from "./catalog.js";
+import { Centers } from "./centers.js";
+import { GAMES, findGame, gameUrl, hubUrl, isSharedOrigin, safeGameRoute } from "./catalog.js";
 import { PlayerSession } from "./services/player-session.js";
 import { soundEffects } from "./services/audio.js";
 
@@ -7,6 +8,8 @@ const sharedOrigin = isSharedOrigin(location.origin);
 const session = new PlayerSession();
 let profile = null, connectionReady = false, connecting = false, connectionError = "";
 let authMode = "signin", authBusy = false, pendingGame = null, activeGame = null;
+let pendingRoute = "";
+const centers = new Centers(session, { showAccount, openGame: (id, route) => requestGame(findGame(id), route) });
 let installPrompt = null, toastTimer, frameTimer, hasInteracted = false;
 
 function toast(text) {
@@ -78,20 +81,21 @@ function showAccount() {
   $("live-hub-link").href = hubUrl(pendingGame?.id);
   updateAccount(); openDialog("account-dialog"); updateConnectionStatus();
 }
-function requestGame(game) {
+function requestGame(game, route = game.route) {
+  route = safeGameRoute(game, route);
   if (!navigator.onLine) { toast("Connect to the internet to open a game."); return; }
   if (game.account === "shared" && !sharedOrigin) { location.assign(hubUrl(game.id)); return; }
-  if (game.account === "shared" && !profile) { pendingGame = game; showAccount(); return; }
-  launchGame(game);
+  if (game.account === "shared" && !profile) { pendingGame = game; pendingRoute = route; showAccount(); return; }
+  launchGame(game, route);
 }
-function launchGame(game) {
+function launchGame(game, route = game.route) {
   pendingGame = null; closeDialog("account-dialog"); activeGame = game;
   soundEffects.syncBackgroundMusic(null); updateMusicUI();
   $("launcher").hidden = true; $("game-player").hidden = false; document.body.classList.add("in-game");
   $("game-player").setAttribute("aria-label", "Playing " + game.name);
   $("frame-recovery").hidden = true;
   document.title = game.name + " · Game Center";
-  const iframe = document.createElement("iframe"); iframe.title = game.name; iframe.src = gameUrl(game);
+  const iframe = document.createElement("iframe"); iframe.title = game.name; iframe.src = gameUrl(game, route);
   iframe.allow = "autoplay; clipboard-write; fullscreen; web-share";
   iframe.referrerPolicy = "strict-origin-when-cross-origin";
   message("frame-status", "Opening " + game.name + "…"); clearTimeout(frameTimer);
@@ -102,7 +106,8 @@ function launchGame(game) {
   }, 18000);
   $("frame-holder").replaceChildren(iframe);
   const url = new URL(location.href);
-  if (url.searchParams.get("play") !== game.id) {
+  if (url.searchParams.get("play") !== game.id || url.searchParams.get("view") !== route) {
+    url.searchParams.set("view", route);
     url.searchParams.set("play", game.id); history.pushState({ game: game.id }, "", url);
   }
   $("game-player").focus({ preventScroll:true });
@@ -111,7 +116,7 @@ function showHub({ updateHistory = true } = {}) {
   activeGame = null; clearTimeout(frameTimer); $("frame-holder").replaceChildren();
   $("game-player").hidden = true; $("launcher").hidden = false; document.body.classList.remove("in-game");
   document.title = "Game Center · Let the good games roll"; soundEffects.syncBackgroundMusic("home"); updateMusicUI();
-  if (updateHistory) { const url = new URL(location.href); url.searchParams.delete("play"); history.replaceState({}, "", url); }
+  if (updateHistory) { const url = new URL(location.href); url.searchParams.delete("play"); url.searchParams.delete("view"); history.replaceState({}, "", url); }
   $("collection").focus({ preventScroll:true });
 }
 function updateMusicUI() {
@@ -150,13 +155,13 @@ for (const mode of ["signin","signup"]) $(mode + "-tab").addEventListener("click
 });
 $("auth-form").addEventListener("submit", async event => {
   event.preventDefault(); if (authBusy || !connectionReady) return;
-  authBusy = true; $("auth-fields").disabled = true; message("auth-error", ""); const game = pendingGame;
+  authBusy = true; $("auth-fields").disabled = true; message("auth-error", ""); const game = pendingGame, route = pendingRoute;
   try {
     const details = { email:$("player-email").value, displayName:$("player-nickname").value };
     await (authMode === "signup" ? session.signUp(details) : session.signIn(details));
     $("player-email").value = ""; $("player-nickname").value = "";
     closeDialog("account-dialog"); toast("You’re in, " + (profile?.displayName || "player") + ". Let the good games roll.");
-    if (game) launchGame(game);
+    if (game) launchGame(game, route);
   } catch (error) {
     message("auth-error", /permission|network|fetch/i.test(error.message) ? "We couldn’t connect to your player. Please try again in a moment." : error.message);
   } finally { authBusy = false; updateAccount(); }
@@ -198,12 +203,12 @@ window.addEventListener("offline", updateConnectionStatus);
 window.addEventListener("online", () => { updateConnectionStatus(); if (!connectionReady) connect(); });
 window.addEventListener("popstate", () => {
   const game = findGame(new URL(location.href).searchParams.get("play"));
-  if (game) requestGame(game); else showHub({ updateHistory:false });
+  if (game) requestGame(game, new URL(location.href).searchParams.get("view")); else showHub({ updateHistory:false });
 });
-session.subscribe(value => { profile = value; updateAccount(); }, () => {
+session.subscribe(value => { profile = value; centers.updateProfile(value); updateAccount(); }, () => {
   connectionError = "Your player connection was interrupted. Your place is saved; reconnect and try again."; updateConnectionStatus();
 });
 await connect();
 const initialGame = findGame(new URL(location.href).searchParams.get("play"));
-if (initialGame) requestGame(initialGame);
+if (initialGame) requestGame(initialGame, new URL(location.href).searchParams.get("view"));
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("./service-worker.js").catch(() => {});

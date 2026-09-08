@@ -19,7 +19,7 @@ No Cloudflare Worker, new Firebase project, new API key, or new database rules a
 ## Players and game launching
 
 - Sign in with the same email and nickname used in Google Feud or Same Slate, or create one shared player here.
-- Existing player IDs, roles, host numbers, Message IDs, game history and scores stay attached to the same profiles. Game-specific statistics remain in the games; Game Center does not rewrite scores.
+- Existing player IDs, roles, host numbers, Message IDs, game history and scores stay attached to the same profiles. Game Center displays each game’s lifetime statistics separately and never rewrites scores.
 - Google Feud and Same Slate open inside the hub without an extra header. Each game has a Game Center icon in its own header and footer. Their full dashboards, scoring, Hall of Fame, messages and host controls remain available.
 - Henry the Train opens without sign-in.
 - The hub pauses its music while a game is open. Returning closes the embedded game view; active rooms remain in Firebase and can be resumed using the game's existing resume controls.
@@ -31,6 +31,15 @@ Firebase's persistent browser session is shared because the public hub and word 
 This is the existing family-game email-and-nickname account model, not a newly introduced password or verified-email system. Do not use it for sensitive account information. Signing out clears this browser's shared identity, not other devices. A separate browser, device, or separately installed app may ask the player to sign in again.
 
 The private Sites publication is a visual/audio review copy on a different domain. Its shared-account controls send players to the public Game Center, where the existing games can reuse the sign-in. No credentials, tokens, email addresses, or Message IDs are transferred in URLs.
+
+## Player cards, Host Center and Master Controls
+
+- **My Player Card / Player Cards**: see lifetime points, games, rounds, win rate, averages, best game and streaks for each word game. Search players by nickname. New players see their own card immediately; other players appear after a completed game.
+- **Host Center**: host/master accounts see every room they hosted, grouped in collapsible Google Feud and Same Slate sections. History is newest first and paginated; opening a section loads only eight room details at a time. Resume a room, inspect its details, view results, or create a new game.
+- **Master Controls**: existing master/admin roles (including Sean’s master account) can approve or decline shared host requests and manage player/host access for both games. Master/admin accounts are protected from these role changes. Full game archives, deletion/score rollback and content moderation remain in each game’s complete master panel, opened directly from the hub.
+- Regular players never request the private users directory or host-request queue. Public player cards contain nicknames and statistics only. Account changes cancel stale reads and clear the open panels.
+- These screens use the existing `playerStats`, `sameSlatePlayerStats`, `userGames`, `sameSlateUserGames`, `games`, `sameSlateGames`, `users` and `hostRequests` rules. **No additional Firebase or Cloudflare setup is needed.**
+- Henry has no hosted rooms or lifetime scoring, so it remains a guest adventure in the collection.
 
 ## Add another game
 

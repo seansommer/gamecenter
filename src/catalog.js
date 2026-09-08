@@ -24,9 +24,9 @@ export const GAMES = Object.freeze([
 ]);
 
 export function findGame(id) { return GAMES.find(game => game.id === id) || null; }
-export function gameUrl(game) {
+export function gameUrl(game, route = game.route) {
   if (!GAMES.includes(game)) throw new Error("Choose a game from the collection.");
-  return `${LIVE_ORIGIN}${game.path}${game.route}`;
+  return `${LIVE_ORIGIN}${game.path}${safeGameRoute(game, route)}`;
 }
 export function hubUrl(gameId = "") {
   const url = new URL(LIVE_HUB);
@@ -34,3 +34,11 @@ export function hubUrl(gameId = "") {
   return url.href;
 }
 export function isSharedOrigin(origin) { return origin === LIVE_ORIGIN; }
+
+export function safeGameRoute(game, route) {
+  if (!GAMES.includes(game)) throw new Error("Choose a game from the collection.");
+  if (game.account !== "shared") return game.route;
+  if (["#/home", "#/host", "#/create", "#/admin", "#/hall-of-fame"].includes(route)) return route;
+  if (/^#\/game\/[A-Za-z0-9_-]{1,128}\/(lobby|play|recap|finale|details)$/.test(route)) return route;
+  return game.route;
+}
