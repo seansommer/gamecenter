@@ -16,6 +16,7 @@
   "shortcuts": [
     {"name":"Play Google Feud","url":"./?play=googlefeud","icons":[{"src":"./assets/games/googlefeud.webp","sizes":"256x256","type":"image/webp"}]},
     {"name":"Play Same Slate","url":"./?play=sameslate","icons":[{"src":"./assets/games/sameslate.webp","sizes":"256x256","type":"image/webp"}]},
-    {"name":"Play Henry the Train","url":"./?play=henrythetrain","icons":[{"src":"./assets/games/henrythetrain.webp","sizes":"256x256","type":"image/webp"}]}
+    {"name":"Play Henry the Train","url":"./?play=henrythetrain","icons":[{"src":"./assets/games/henrythetrain.webp","sizes":"256x256","type":"image/webp"}]},
+    {"name":"Play Henry’s Trains","url":"./?play=henrystrains","icons":[{"src":"./assets/games/henrystrains.webp","sizes":"256x256","type":"image/webp"}]}
   ]
 }

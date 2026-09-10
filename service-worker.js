@@ -1,11 +1,11 @@
 const PREFIX = "gamecenter-shell-";
-const CACHE = "gamecenter-shell-v4";
+const CACHE = "gamecenter-shell-v5";
 const ASSETS = [
-  "./", "./index.html", "./styles.css?v=4", "./manifest.webmanifest",
+  "./", "./index.html", "./styles.css?v=5", "./manifest.webmanifest",
   "./assets/arcade-lounge.webp", "./assets/app-icon-192.png", "./assets/app-icon-512.png",
   "./assets/apple-touch-icon.png", "./assets/favicon-48.png",
-  "./assets/games/googlefeud.webp", "./assets/games/sameslate.webp", "./assets/games/henrythetrain.webp",
-  "./src/app.js?v=4", "./src/appearance.js?v=1", "./src/catalog.js", "./src/centers.js", "./src/center-model.js", "./src/services/game-center.js", "./src/config.js", "./src/identity.js",
+  "./assets/games/googlefeud.webp", "./assets/games/sameslate.webp", "./assets/games/henrythetrain.webp", "./assets/games/henrystrains.webp",
+  "./src/app.js?v=5", "./src/appearance.js?v=1", "./src/catalog.js", "./src/centers.js", "./src/center-model.js", "./src/services/game-center.js", "./src/config.js", "./src/identity.js",
   "./src/services/audio.js", "./src/services/music.js", "./src/services/player-session.js"
 ];
 self.addEventListener("install", event => {

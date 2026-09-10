@@ -37,5 +37,19 @@
     "outputs": [
       "assets/social-share.jpg"
     ]
+  },
+  {
+    "name": "henrystrains-game-icon",
+    "source_repository": "seansommer/henrystrains",
+    "source_asset": "public/henry-app-icon.png",
+    "generation_method": "built-in image_gen",
+    "provenance": "https://github.com/seansommer/henrystrains/blob/main/docs/henry-named-artwork.md",
+    "description": "Original blue and turquoise train with a gold-rimmed nameplate reading Henry. Same artwork as the game’s app icon.",
+    "outputs": [
+      "assets/games/henrystrains.webp"
+    ],
+    "width": 256,
+    "height": 256,
+    "format": "WebP"
   }
 ]

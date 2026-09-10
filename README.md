@@ -2,7 +2,7 @@
 
 **Good games. Questionable bragging rights.**
 
-A warm amber-and-coral home for Google Feud, Same Slate, Henry the Train, and future games. The collection uses the games' real home-screen icons, original arcade artwork, subtle motion, a shared player sign-in, and an original synthesized soundtrack.
+A warm amber-and-coral home for Google Feud, Same Slate, Henry the Train, Henry’s Trains, and future games. The collection uses the games' real home-screen icons, original arcade artwork, subtle motion, a shared player sign-in, and an original synthesized soundtrack.
 
 Public address: https://seansommer.github.io/gamecenter/
 
@@ -50,6 +50,8 @@ The private Sites publication is a visual/audio review copy on a different domai
 5. Increment the service-worker cache version. If editing versioned entrypoints, update their matching URLs in `index.html` and the service worker.
 6. Run the checks below and push to `main`.
 
+Henry’s Trains opens as a guest game at `/henrystrains/`. Its Game Center tile uses the same named Henry artwork as the game’s home-screen icon. The share button in its parent controls sends the public game link, which supplies the original train sharing artwork.
+
 Only catalog entries may open in the embedded player. Arbitrary query-string URLs are rejected.
 
 ## Development and verification
@@ -74,7 +76,7 @@ Original artwork prompts and output mapping: `docs/artwork-manifest.json`.
 - Warm miniature arcade lounge: `assets/arcade-lounge.webp`.
 - New joystick webapp icon: 512px, 192px, 180px Apple touch and 48px favicon assets.
 - Social artwork: `assets/social-share.jpg`, 1200×630.
-- Game icon source repositories: `seansommer/googlefeud`, `seansommer/sameslate`, and `seansommer/henrythetrain`; resized without changing their designs.
+- Game icon source repositories: `seansommer/googlefeud`, `seansommer/sameslate`, `seansommer/henrythetrain`, and `seansommer/henrystrains`; resized without changing their designs.
 - **Meet Me at the Arcade**: an original 32-beat, 96 BPM synthesized composition in `src/services/music.js`.
 - Same Slate's separate update adds **Same Wavelength** (menu) and **Little Matches** (gameplay).
 

@@ -20,6 +20,12 @@ export const GAMES = Object.freeze([
     path: "/henrythetrain/", route: "", account: "guest",
     category: "The little adventure", description: "All aboard for a little adventure. No ticket—or sign-in—required.",
     detail: "Tap & play · No sign-in", color: "#89cbd3"
+  }),
+  Object.freeze({
+    id: "henrystrains", name: "Henry’s Trains", icon: "./assets/games/henrystrains.webp",
+    path: "/henrystrains/", route: "", account: "guest",
+    category: "The toy railway", description: "Little trains. Big conductor energy. You control the whole railway.",
+    detail: "3D train world · No sign-in", color: "#63d7ed"
   })
 ]);
 
